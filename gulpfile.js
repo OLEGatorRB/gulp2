@@ -1,3 +1,4 @@
+const fileinclude = require("gulp-file-include");
 
 let project_folder = "dst";
 let source_folder = "#src";
@@ -42,6 +43,7 @@ function browserSync(params){
 
 function html (){
     return src(path.src.html)
+        .pipe(fileinclude())
         .pipe(dest(path.build.html))
         .pipe(browsersync.stream())
 }
