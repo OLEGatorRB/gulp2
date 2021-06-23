@@ -48,8 +48,12 @@ function html (){
         .pipe(browsersync.stream())
 }
 
+function watchFiles(params){
+    gulp.watch([path.watch.html],html)
+}
+
 let build = gulp.series(html);
-let watch = gulp.parallel(build, browserSync);
+let watch = gulp.parallel(build, watchFiles, browserSync);
 
 exports.html = html;
 exports.build = build;
