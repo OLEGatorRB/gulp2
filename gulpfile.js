@@ -1,3 +1,4 @@
+const del = require("del");
 const fileinclude = require("gulp-file-include");
 
 let project_folder = "dst";
@@ -31,6 +32,7 @@ let {src, dest} = require("gulp"),
     gulp = require("gulp"),
     browsersync = require("browser-sync").create();
 
+
 function browserSync(params){
     browsersync.init({
         server: {
@@ -52,7 +54,11 @@ function watchFiles(params){
     gulp.watch([path.watch.html],html)
 }
 
-let build = gulp.series(html);
+function clean (params){
+    return del(path.clean);
+}
+
+let build = gulp.series(clean, html);
 let watch = gulp.parallel(build, watchFiles, browserSync);
 
 exports.html = html;
